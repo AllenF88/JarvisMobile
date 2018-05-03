@@ -6,14 +6,15 @@ import datetime
 import telegram
 import picamera
 
-chat_id=int(str(sys.argv[1]))
+home_dir='/home/pi/Jarvis/JarvisHomeMonitoring'
+
 botKey = ""
 
-with open('/home/pi/JarvisMobile/cfg/bot.cfg','r') as bot_cfg_file:
-	for line in bot_cfg_file:
-		botKey = line.strip()
-    print (botKey)
+with open(home_dir + '/cfg/bot.cfg','r') as bot_cfg_file:
+        for line in bot_cfg_file:
+                botKey = line.strip()
 
+chat_id=int(str(sys.argv[1]))
 # Connect to our bot
 bot = telegram.Bot(token=botKey)
 
@@ -25,10 +26,10 @@ with picamera.PiCamera() as camera:
         camera.framerate =1
         camera.shutter_speed = 6000000
         camera.iso = 1600
-	timeStamp=time.strftime("%Y%m%d_%H%M%S")
-	filename="/home/pi/JarvisMobile/captures/"+timeStamp+"_NightCapture.jpg"
-	camera.capture(filename)
-	print("Photo taken")
+        timeStamp=time.strftime("%Y%m%d_%H%M%S")
+        filename=home_dir + "/captures/"+timeStamp+"_NightCapture.jpg"
+        camera.capture(filename)
+        print("Photo taken")
         camera.close()
 
 # Sends a message to the chat
