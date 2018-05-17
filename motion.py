@@ -6,6 +6,7 @@ import telepot
 import datetime
 import telegram
 import picamera
+import os.path
 
 GPIO.setmode(GPIO.BCM)
 PIR_PIN=7
@@ -13,6 +14,7 @@ GPIO.setup(PIR_PIN,GPIO.IN)
 chat_id=330392544
 
 home_dir='/home/pi/Jarvis/JarvisHomeMonitoring'
+stop_file=home_dir + '/STOP.MOTION'
 
 botKey = ""
 
@@ -45,6 +47,9 @@ try:
                 print "Motion Detected!"
                 sendSnap()
             time.sleep(1)
+	    if os.path.isfile(stop_file):
+		print("Stop file found. Shutting down motion detection.") 
+		break 
             
 except KeyboardInterrupt:
         print "Quit"
