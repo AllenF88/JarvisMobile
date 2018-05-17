@@ -13,7 +13,7 @@ PIR_PIN=7
 GPIO.setup(PIR_PIN,GPIO.IN)
 chat_id=330392544
 
-home_dir='/home/pi/Jarvis/JarvisHomeMonitoring'
+home_dir='/home/pi/Jarvis/JarvisMobile'
 stop_file=home_dir + '/STOP.MOTION'
 
 botKey = ""
