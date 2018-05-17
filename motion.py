@@ -23,6 +23,8 @@ day_night=str(sys.argv[2])
 home_dir='/home/pi/Jarvis/JarvisMobile'
 stop_file=home_dir + '/STOP.MOTION'
 
+rm stop_file
+
 botKey = ""
 
 with open(home_dir + '/cfg/bot.cfg','r') as bot_cfg_file:
