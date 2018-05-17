@@ -6,7 +6,11 @@ import datetime
 import telegram
 import picamera
 
-home_dir='/home/pi/Jarvis/JarvisHomeMonitoring'
+if (len(sys.argv) < 2):
+   print( "Usage:" +  sys.argv[0] + " chat_id")
+   sys.exit(1)
+
+home_dir='/home/pi/Jarvis/JarvisMobile'
 
 botKey = ""
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import sys
 import RPi.GPIO as GPIO
 import time
 import telepot
@@ -8,10 +9,16 @@ import telegram
 import picamera
 import os.path
 
+if (len(sys.argv) < 3):
+   print( "Usage:" +  sys.argv[0] + " chat_id day/night")
+   sys.exit(1)
+
 GPIO.setmode(GPIO.BCM)
 PIR_PIN=7
 GPIO.setup(PIR_PIN,GPIO.IN)
-chat_id=330392544
+
+chatid=int(str(sys.argv[1]))
+day_night=str(sys.argv[2])
 
 home_dir='/home/pi/Jarvis/JarvisMobile'
 stop_file=home_dir + '/STOP.MOTION'
@@ -34,7 +41,26 @@ def sendSnap():
         camera.close()
 
         # Sends a message to the chat
-        botMotion.sendPhoto(chat_id=chat_id, photo=open(filename, 'rb'))
+        botMotion.sendPhoto(chat_id=chatid, photo=open(filename, 'rb'))
+        print("Photo sent")
+
+def sendNightPic():
+	# Connect to our bot
+        botMotion = telegram.Bot(token=botKey)
+	with picamera.PiCamera() as camera:
+          camera.resolution = ( 1280,960 )
+          camera.exposure_mode = 'night'
+          camera.framerate =1
+          camera.shutter_speed = 6000000
+          camera.iso = 1600
+          timeStamp=time.strftime("%Y%m%d_%H%M%S")
+          filename=home_dir + "/captures/"+timeStamp+"_NightCapture.jpg"
+          camera.capture(filename)
+          print("Photo taken")
+          camera.close()
+
+	# Sends a message to the chat
+        botMotion.sendPhoto(chat_id=chatid, photo=open(filename, 'rb'))
         print("Photo sent")
 
 try:
@@ -45,7 +71,10 @@ try:
     while True:
             if GPIO.input(PIR_PIN):
                 print "Motion Detected!"
-                sendSnap()
+                if day_night == "day":
+		   sendSnap()
+		elif day_night == "night":
+		   sendNightPic()
             time.sleep(1)
 	    if os.path.isfile(stop_file):
 		print("Stop file found. Shutting down motion detection.") 
