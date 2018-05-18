@@ -23,7 +23,7 @@ day_night=str(sys.argv[2])
 home_dir='/home/pi/Jarvis/JarvisMobile'
 stop_file=home_dir + '/STOP.MOTION'
 
-rm stop_file
+os.remove(stop_file)
 
 botKey = ""
 
