@@ -26,14 +26,13 @@ stop_file=home_dir + '/STOP.MOTION'
 os.remove(stop_file)
 
 botKey = ""
+botMotion = telegram.Bot(token=botKey)
 
 with open(home_dir + '/cfg/bot.cfg','r') as bot_cfg_file:
         for line in bot_cfg_file:
                 botKey = line.strip()
 
 def sendSnap():
-        # Connect to our bot
-        botMotion = telegram.Bot(token=botKey)
         #Get the photo
         camera = picamera.PiCamera()
         timeStamp = time.strftime("%Y%m%d_%H%M%S")
@@ -48,7 +47,6 @@ def sendSnap():
 
 def sendNightPic():
 	# Connect to our bot
-        botMotion = telegram.Bot(token=botKey)
 	with picamera.PiCamera() as camera:
           camera.resolution = ( 1280,960 )
           camera.exposure_mode = 'night'
@@ -69,6 +67,8 @@ try:
     print "PIR Module Test (CTRL+C to exit)"
     time.sleep(6)
     print "Ready"
+    botMotion.sendMessage(chatid , 'Motion sensor running.')
+
 
     while True:
             if GPIO.input(PIR_PIN):
