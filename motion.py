@@ -26,11 +26,12 @@ stop_file=home_dir + '/STOP.MOTION'
 os.remove(stop_file)
 
 botKey = ""
-botMotion = telegram.Bot(token=botKey)
 
 with open(home_dir + '/cfg/bot.cfg','r') as bot_cfg_file:
         for line in bot_cfg_file:
                 botKey = line.strip()
+		
+botMotion = telegram.Bot(token=botKey)
 
 def sendSnap():
         #Get the photo
