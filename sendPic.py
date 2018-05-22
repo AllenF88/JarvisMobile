@@ -59,6 +59,6 @@ def sendNightPic():
 #Start of script here
 
 if mode == "Day":
-		   sendSnap()
+	sendSnap()
 elif mode == "Night":
-		   sendNightPic()        
+	sendNightPic()        
