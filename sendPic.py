@@ -21,7 +21,7 @@ with open(home_dir + '/cfg/bot.cfg','r') as bot_cfg_file:
 
 botMotion = telegram.Bot(token=botKey)
 
-chat_id=int(str(sys.argv[1]))
+chatid=int(str(sys.argv[1]))
 mode=str(sys.argv[2])
 print("script called, with " + str(chat_id))
 
