@@ -11,7 +11,7 @@ if (len(sys.argv) < 3):
    print( "Usage:" +  sys.argv[0] + " chatid PicMode")
    sys.exit(1)
 
-home_dir='/home/pi/Jarvis/JarvisHomeMonitoring'
+home_dir='/home/pi/Jarvis/JarvisMobile'
 
 botKey = ""
 
