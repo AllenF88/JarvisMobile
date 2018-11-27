@@ -19,7 +19,7 @@ with open(home_dir + '/cfg/bot.cfg','r') as bot_cfg_file:
         for line in bot_cfg_file:
                 botKey = line.strip()
 
-botMotion = telegram.Bot(token=botKey)
+botMiniMe = telegram.Bot(token=botKey)
 
 chatid=int(str(sys.argv[1]))
 mode=str(sys.argv[2])
@@ -36,7 +36,7 @@ def sendSnap():
         camera.close()
 
         # Sends a message to the chat
-        botMotion.sendPhoto(chat_id=chatid, photo=open(filename, 'rb'))
+        botMiniMe.sendPhoto(chat_id=chatid, photo=open(filename, 'rb'))
         print("Photo sent")
 
 def sendNightPic():
@@ -54,10 +54,11 @@ def sendNightPic():
           camera.close()
 
 	# Sends a message to the chat
-        botMotion.sendPhoto(chat_id=chatid, photo=open(filename, 'rb'))
+        botMiniMe.sendPhoto(chat_id=chatid, photo=open(filename, 'rb'))
         print("Photo sent")
    
 #Start of script here
+botMiniMe.sendMessage(chatid,'MiniMe here, taking the pic.')
 
 if mode == "Day":
 	sendSnap()
