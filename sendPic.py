@@ -25,6 +25,7 @@ chatid=int(str(sys.argv[1]))
 mode=str(sys.argv[2])
 
 print("script called, with " + str(chatid))
+botMiniMe.sendMessage(chatid,'MiniMe here, taking the pic.')
 
 def sendSnap():
         #Get the photo
@@ -58,7 +59,6 @@ def sendNightPic():
         print("Photo sent")
    
 #Start of script here
-botMiniMe.sendMessage(chatid,'MiniMe here, taking the pic.')
 
 if mode == "Day":
 	sendSnap()
